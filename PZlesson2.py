@@ -14,7 +14,6 @@ user_tuple = (1, 2, 3, 4, 5, 6)
 user_set = set('abc')
 user_dict = {1: 'a', 2: 'b', 3: 'c'}
 
-
 print(f' user_number is {type(user_number)}')
 print(f' user_string is {type(user_string)}')
 print(f' user_list is {type(user_list)}')
