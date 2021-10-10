@@ -6,19 +6,21 @@
 Элементы списка можно не запрашивать у пользователя, а указать явно, в программе.
 """
 
-# user_number = 100
-# user_stroka = 'Hello'
-# user_list = [1, 2, 3, 4, 5, 6]
-# user_tuple = (1, 2, 3, 4, 5, 6)
-# user_set = set('abc')
-# user_dict = {1: 'a', 2: 'b', 3: 'c'}
-#
-# print(f'user_number is {type(user_number)}')
-# print(f'user_stroka is {type(user_stroka)}')
-# print(f'user_list is {type(user_list)}')
-# print(f'user_tuple is {type(user_tuple)}')
-# print(f'user_set is {type(user_set)}')
-# print(f'user_dict is {type(user_dict)}')
+user_number = 100
+user_string = 'Hello'
+user_list = [1, 2, 3, 4, 5, 6]
+user_list_in_list = [[1, 2, 3], [4, 5, 6]]
+user_tuple = (1, 2, 3, 4, 5, 6)
+user_set = set('abc')
+user_dict = {1: 'a', 2: 'b', 3: 'c'}
+
+print(f' user_number is {type(user_number)}')
+print(f' user_string is {type(user_string)}')
+print(f' user_list is {type(user_list)}')
+print(f' user_list_in_list is {type(user_list_in_list)}')
+print(f' user_tuple is {type(user_tuple)}')
+print(f' user_set is {type(user_set)}')
+print(f' user_dict is {type(user_dict)}')
 
 """
 2. Для списка реализовать обмен значений соседних элементов.
@@ -27,20 +29,20 @@
 Для заполнения списка элементов нужно использовать функцию input().
 """
 
-# count_element = int(input('Введите количество элементов списка: '))
-# user_list = []
-#
-# i = 1
-# while i <= count_element:
-#     user_list.append(input(f'Введите {i}й элемент списка: '))
-#     i += 1
-# print(f'Первоначальный список: {user_list}')
-#
-# i = 0
-# while i < count_element-1:
-#     user_list[i], user_list[i+1] = user_list[i+1], user_list[i]
-#     i = i + 2
-# print(f'Измененный список {user_list}')
+count_element = int(input('Введите количество элементов списка: '))
+user_list = []
+
+i = 1
+while i <= count_element:
+    user_list.append(input(f'Введите {i}й элемент списка: '))
+    i += 1
+print(f'Первоначальный список: {user_list}')
+
+i = 0
+while i < count_element-1:
+    user_list[i], user_list[i+1] = user_list[i+1], user_list[i]
+    i = i + 2
+print(f'Измененный список {user_list}')
 
 """
 3. Пользователь вводит месяц в виде целого числа от 1 до 12.
@@ -48,29 +50,29 @@
 Напишите решения через list и dict.
 """
 
-# user_month = int(input('Введите номер месяца от 1 до 12: '))
-#
-# # Вариант 1 - через словарь
-# season_dict = {1: 'зима', 2: 'зима', 3: 'весна',
-#                4: 'весна', 5: 'весна', 6: 'лето',
-#                7: 'лето', 8: 'лето', 9: 'осень',
-#                10: 'осень', 11: 'осень', 12: 'зима'}
-# print(f'Пора года (через словарь) - {season_dict.get(user_month)}')
-#
-# # Вариант 2 - через лист
-# season_list = ['зима', 'весна', 'лето', 'осень']
-# element = 0
-# if 1 <= user_month <= 2 or user_month == 12:
-#     element = 0
-# elif 3 <= user_month <= 5:
-#     element = 1
-# elif 6 <= user_month <= 8:
-#     element = 2
-# elif 9 <= user_month <= 11:
-#     element = 3
-# else:
-#     print('Пора года не найдена')
-# print(f'Пора года (через лист) - {season_list[element]}')
+user_month = int(input('Введите номер месяца от 1 до 12: '))
+
+# Вариант 1 - через словарь
+season_dict = {1: 'зима', 2: 'зима', 3: 'весна',
+               4: 'весна', 5: 'весна', 6: 'лето',
+               7: 'лето', 8: 'лето', 9: 'осень',
+               10: 'осень', 11: 'осень', 12: 'зима'}
+print(f'Пора года (через словарь) - {season_dict.get(user_month)}')
+
+# Вариант 2 - через лист
+season_list = ['зима', 'весна', 'лето', 'осень']
+element = 0
+if 1 <= user_month <= 2 or user_month == 12:
+    element = 0
+elif 3 <= user_month <= 5:
+    element = 1
+elif 6 <= user_month <= 8:
+    element = 2
+elif 9 <= user_month <= 11:
+    element = 3
+else:
+    print('Пора года не найдена')
+print(f'Пора года (через лист) - {season_list[element]}')
 
 """
 4. Пользователь вводит строку из нескольких слов, разделённых пробелами.
@@ -78,6 +80,11 @@
 Если слово длинное, выводить только первые 10 букв в слове.
 """
 
+user_string = input('Введите строку из нескольких слов, разделенных пробелами: ')
+user_list = user_string.split(' ')
+
+for word in user_list:
+    print(word[:10])
 
 """
 5. Реализовать структуру «Рейтинг», представляющую собой набор натуральных чисел, который не возрастает.
@@ -90,6 +97,12 @@
 Пользователь ввёл число 1. Результат: 7, 5, 3, 3, 2, 1.
 Набор натуральных чисел можно задать сразу в коде, например, my_list = [7, 5, 3, 3, 2].
 """
+
+user_list = [7, 5, 3, 3, 2]
+new_element = int(input('Введите новый элемент рейтинга: '))
+user_list.append(new_element)
+user_list.sort(reverse=True)
+print(f'Рейтинг: {user_list}')
 
 """
 6. *Реализовать структуру данных «Товары». Она должна представлять собой список кортежей.
