@@ -4,6 +4,7 @@
 Запросите у пользователя некоторые числа и строки и сохраните в переменные, затем выведите на экран.
 """
 
+
 name = input('Enter your name: ')
 print(f'Hi, {name}')
 age = int(input('Enter your age: '))
