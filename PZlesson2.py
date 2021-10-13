@@ -29,7 +29,16 @@ print(f' user_dict is {type(user_dict)}')
 Для заполнения списка элементов нужно использовать функцию input().
 """
 
-count_element = int(input('Введите количество элементов списка: '))
+count_element = True
+while count_element:
+    count_element = input('Введите количество элементов списка (целое положительное число): ')
+    if count_element.isdigit() and int(count_element) > 0 and int(count_element) % 1 == 0:
+        count_element = int(count_element)
+        break
+    else:
+        count_element = True
+        print(f'Необходимо ввести целое положительное число!')
+
 user_list = []
 
 i = 1
@@ -39,8 +48,8 @@ while i <= count_element:
 print(f'Первоначальный список: {user_list}')
 
 i = 0
-while i < count_element-1:
-    user_list[i], user_list[i+1] = user_list[i+1], user_list[i]
+while i < count_element - 1:
+    user_list[i], user_list[i + 1] = user_list[i + 1], user_list[i]
     i = i + 2
 print(f'Измененный список {user_list}')
 
@@ -50,14 +59,26 @@ print(f'Измененный список {user_list}')
 Напишите решения через list и dict.
 """
 
-user_month = int(input('Введите номер месяца от 1 до 12: '))
+user_month = True
+while user_month:
+    user_month = input('Введите номер месяца от 1 до 12: ')
+    if user_month.isdigit() and 1 <= int(user_month) <= 12 and int(user_month) % 1 == 0:
+        user_month = int(user_month)
+        break
+    else:
+        user_month = True
+        print(f'Необходимо ввести целое положительное число от 1 до 12!')
 
 # Вариант 1 - через словарь
-season_dict = {1: 'зима', 2: 'зима', 3: 'весна',
-               4: 'весна', 5: 'весна', 6: 'лето',
-               7: 'лето', 8: 'лето', 9: 'осень',
-               10: 'осень', 11: 'осень', 12: 'зима'}
-print(f'Пора года (через словарь) - {season_dict.get(user_month)}')
+season_dict = {(12, 1, 2): 'зима',
+               (3, 4, 5): 'весна',
+               (6, 7, 8): 'лето',
+               (9, 10, 11): 'осень'
+               }
+
+for key, value in season_dict.items():
+    if user_month in key:
+        print(f'Пора года (через словарь) - {value}')
 
 # Вариант 2 - через лист
 season_list = ['зима', 'весна', 'лето', 'осень']
@@ -83,8 +104,8 @@ print(f'Пора года (через лист) - {season_list[element]}')
 user_string = input('Введите строку из нескольких слов, разделенных пробелами: ')
 user_list = user_string.split(' ')
 
-for word in user_list:
-    print(word[:10])
+for ind, element in enumerate(user_list):
+    print(ind + 1, element[:10])
 
 """
 5. Реализовать структуру «Рейтинг», представляющую собой набор натуральных чисел, который не возрастает.
@@ -99,7 +120,17 @@ for word in user_list:
 """
 
 user_list = [7, 5, 3, 3, 2]
-new_element = int(input('Введите новый элемент рейтинга: '))
+
+new_element = True
+while new_element:
+    new_element = input('Введите новый элемент рейтинга (целое число): ')
+    if new_element.isdigit():
+        new_element = int(new_element)
+        break
+    else:
+        new_element = True
+        print(f'Необходимо ввести целое число!')
+
 user_list.append(new_element)
 user_list.sort(reverse=True)
 print(f'Рейтинг: {user_list}')
@@ -116,9 +147,45 @@ print(f'Рейтинг: {user_list}')
     (2, {“название”: “принтер”, “цена”: 6000, “количество”: 2, “eд”: “шт.”}),
     (3, {“название”: “сканер”, “цена”: 2000, “количество”: 7, “eд”: “шт.”})
 ]
+"""
+
+print('-------------- Каталог товаров --------------')
+catalog_product = []
+count_product = 0
+choice = True
+
+while choice:
+    print(f'Товар {count_product + 1}')
+    name_product = input('Введите наименование товара: ')
+    price_product = input('Введите стоимость товара: ')
+    count_items = input('Введите количество единиц товара: ')
+    unit_product = input('Введите единицу измерения товара: ')
+    product = {'название': name_product,
+               'цена': price_product,
+               'количество': count_items,
+               'единица измерения': unit_product}
+    catalog_product.append(product)
+    choice = input('Хотите добавить еще один товар? Если да - введите yes: ')
+    if choice == 'yes':
+        choice = True
+        count_product += 1
+    else:
+        break
+
+catalog_product_list = []
+
+for ind, element in enumerate(catalog_product):
+    item_product = ind + 1, element
+    catalog_product_list.append(tuple(item_product))
+
+print('-------------- Каталог товаров --------------')
+
+for element in catalog_product_list:
+    print(element)
+
+"""
 Нужно собрать аналитику о товарах. Реализовать словарь, в котором каждый ключ — характеристика товара,
 например, название. Тогда значение — список значений-характеристик, например, список названий товаров.
-
 Пример:
 {
     “название”: [“компьютер”, “принтер”, “сканер”],
@@ -127,3 +194,25 @@ print(f'Рейтинг: {user_list}')
     “ед”: [“шт.”]
 }
 """
+
+names_product = []
+prices_product = []
+counts_items = []
+units_product = []
+
+for element in catalog_product_list:
+    names_product.append(element[1]['название'])
+    prices_product.append(element[1]['цена'])
+    counts_items.append(element[1]['количество'])
+    units_product.append(element[1]['единица измерения'])
+
+print('-------------- Аналитика о товарах --------------')
+
+statistic_product = {
+    'название': list(set(names_product)),
+    'цена': list(set(prices_product)),
+    'количество': list(set(counts_items)),
+    'единица измерения': list(set(units_product))
+}
+
+print(statistic_product)
