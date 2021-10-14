@@ -6,21 +6,10 @@
 Элементы списка можно не запрашивать у пользователя, а указать явно, в программе.
 """
 
-user_number = 100
-user_string = 'Hello'
-user_list = [1, 2, 3, 4, 5, 6]
-user_list_in_list = [[1, 2, 3], [4, 5, 6]]
-user_tuple = (1, 2, 3, 4, 5, 6)
-user_set = set('abc')
-user_dict = {1: 'a', 2: 'b', 3: 'c'}
+my_list = [10, 5.2, 'text', ('a', 'b', 'c'), {1: 'a', 2: 'b', 3: 'c'}, [1, 2, 3, 4, 5, 6], set('abc')]
 
-print(f' user_number is {type(user_number)}')
-print(f' user_string is {type(user_string)}')
-print(f' user_list is {type(user_list)}')
-print(f' user_list_in_list is {type(user_list_in_list)}')
-print(f' user_tuple is {type(user_tuple)}')
-print(f' user_set is {type(user_set)}')
-print(f' user_dict is {type(user_dict)}')
+for element in my_list:
+    print(f'{element} - тип {type(element)}')
 
 """
 2. Для списка реализовать обмен значений соседних элементов.
@@ -29,29 +18,22 @@ print(f' user_dict is {type(user_dict)}')
 Для заполнения списка элементов нужно использовать функцию input().
 """
 
-count_element = True
-while count_element:
-    count_element = input('Введите количество элементов списка (целое положительное число): ')
-    if count_element.isdigit() and int(count_element) > 0 and int(count_element) % 1 == 0:
-        count_element = int(count_element)
-        break
-    else:
-        count_element = True
-        print(f'Необходимо ввести целое положительное число!')
-
-user_list = []
-
-i = 1
-while i <= count_element:
-    user_list.append(input(f'Введите {i}й элемент списка: '))
-    i += 1
-print(f'Первоначальный список: {user_list}')
-
-i = 0
-while i < count_element - 1:
-    user_list[i], user_list[i + 1] = user_list[i + 1], user_list[i]
-    i = i + 2
-print(f'Измененный список {user_list}')
+try:
+    count_element = int(input('Введите количество элементов списка (целое положительное число): '))
+except ValueError:
+    print('Введено некорретное значение!')
+else:
+    user_list = []
+    i = 1
+    while i <= count_element:
+        user_list.append(input(f'Введите {i}й элемент списка: '))
+        i += 1
+    print(f'Первоначальный список: {user_list}')
+    i = 0
+    while i in range(0, len(user_list)-1, 2):
+        user_list[i], user_list[i + 1] = user_list[i + 1], user_list[i]
+        i = i + 2
+    print(f'Измененный список {user_list}')
 
 """
 3. Пользователь вводит месяц в виде целого числа от 1 до 12.
@@ -59,41 +41,40 @@ print(f'Измененный список {user_list}')
 Напишите решения через list и dict.
 """
 
-user_month = True
-while user_month:
-    user_month = input('Введите номер месяца от 1 до 12: ')
-    if user_month.isdigit() and 1 <= int(user_month) <= 12 and int(user_month) % 1 == 0:
-        user_month = int(user_month)
-        break
-    else:
-        user_month = True
-        print(f'Необходимо ввести целое положительное число от 1 до 12!')
-
-# Вариант 1 - через словарь
-season_dict = {(12, 1, 2): 'зима',
-               (3, 4, 5): 'весна',
-               (6, 7, 8): 'лето',
-               (9, 10, 11): 'осень'
-               }
-
-for key, value in season_dict.items():
-    if user_month in key:
-        print(f'Пора года (через словарь) - {value}')
-
-# Вариант 2 - через лист
-season_list = ['зима', 'весна', 'лето', 'осень']
-element = 0
-if 1 <= user_month <= 2 or user_month == 12:
-    element = 0
-elif 3 <= user_month <= 5:
-    element = 1
-elif 6 <= user_month <= 8:
-    element = 2
-elif 9 <= user_month <= 11:
-    element = 3
+try:
+    user_month = int(input('Введите номер месяца от 1 до 12: '))
+    if user_month == 0 or user_month > 12:
+        raise ValueError
+except ValueError:
+    print('Введено некорретное значение!')
 else:
-    print('Пора года не найдена')
-print(f'Пора года (через лист) - {season_list[element]}')
+    # Вариант 1 - через словарь
+    season_dict = {(12, 1, 2): 'зима',
+                   (3, 4, 5): 'весна',
+                   (6, 7, 8): 'лето',
+                   (9, 10, 11): 'осень'
+                   }
+
+    for key, value in season_dict.items():
+        if user_month in key:
+            print(f'Пора года (через словарь) - {value}')
+
+    # Вариант 2 - через лист
+    winner = [12, 1, 2]
+    spring = [3, 4, 5]
+    summer = [6, 7, 8]
+    autumn = [9, 10, 11]
+    if user_month in winner:
+        print(f'Пора года (через лист) - зима')
+    elif user_month in spring:
+        print(f'Пора года (через лист) - весна')
+    elif user_month in summer:
+        print(f'Пора года (через лист) - лето')
+    elif user_month in autumn:
+        print(f'Пора года (через лист) - осень')
+    else:
+        print('Пора года не найдена')
+
 
 """
 4. Пользователь вводит строку из нескольких слов, разделённых пробелами.
@@ -152,22 +133,16 @@ print(f'Рейтинг: {user_list}')
 print('-------------- Каталог товаров --------------')
 catalog_product = []
 count_product = 0
-choice = True
 
-while choice:
+while True:
     print(f'Товар {count_product + 1}')
-    name_product = input('Введите наименование товара: ')
-    price_product = input('Введите стоимость товара: ')
-    count_items = input('Введите количество единиц товара: ')
-    unit_product = input('Введите единицу измерения товара: ')
-    product = {'название': name_product,
-               'цена': price_product,
-               'количество': count_items,
-               'единица измерения': unit_product}
+    product = {'название': input('Введите наименование товара: '),
+               'цена': input('Введите стоимость товара: '),
+               'количество': input('Введите количество единиц товара: '),
+               'единица измерения': input('Введите единицу измерения товара: ')}
     catalog_product.append(product)
     choice = input('Хотите добавить еще один товар? Если да - введите yes: ')
     if choice == 'yes':
-        choice = True
         count_product += 1
     else:
         break
@@ -209,10 +184,10 @@ for element in catalog_product_list:
 print('-------------- Аналитика о товарах --------------')
 
 statistic_product = {
-    'название': list(set(names_product)),
-    'цена': list(set(prices_product)),
-    'количество': list(set(counts_items)),
-    'единица измерения': list(set(units_product))
+    'название': list(names_product),
+    'цена': list(prices_product),
+    'количество': list(counts_items),
+    'единица измерения': list(units_product)
 }
 
 print(statistic_product)
