@@ -128,3 +128,5 @@ def int_func(user_string):
 
 
 print(int_func('rusak irina stanislavovna'))
+
+
