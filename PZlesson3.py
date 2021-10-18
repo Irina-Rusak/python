@@ -56,7 +56,7 @@ def my_func(*args):
     return result
 
 
-print(my_func(10, 25.5, 25.5))
+print(my_func(10, 30, 25.5))
 
 """
 4. Программа принимает действительное положительное число x и целое отрицательное число y.
@@ -75,19 +75,26 @@ def my_func_v1(x, y):
     return result
 
 
-def my_func_v2(x, y):
+def my_func_v2(x: int, y: int) -> float:
     try:
-        result = x
-        for i in range(-y - 1):
-            result = result * x
-        result = 1 / result
+        if y > 0 or x <= 0:
+            return f'Неверные входные данные.'
+        elif y == 0:
+            return 1
+        else:
+            result = x
+            for i in range(-y - 1):
+                result = result * x
+            result = 1 / result
     except Exception as e:
         result = f'Ошибка: {e}'
     return result
 
 
-print(my_func_v1(25, -2))
-print(my_func_v2(25, -2))
+print(my_func_v1(25, -10))
+print(my_func_v2(25, -10))
+print(my_func_v2(-1, -10))
+print(my_func_v2(2, 2))
 
 """
 5. Программа запрашивает у пользователя строку чисел, разделенных пробелом.
@@ -97,10 +104,11 @@ print(my_func_v2(25, -2))
 Если специальный символ введен после нескольких чисел,
 то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
 """
+# спец.символ - любой нечисловой символ
 
 result = 0
 while True:
-    user_list = input('Введите строку чисел, разделенных пробелами: ')
+    user_list = input('Введите строку чисел, разделенных пробелами (для остановки введите любой нечисловой символ): ')
     elements = user_list.split()
     try:
         for element in elements:
@@ -128,5 +136,3 @@ def int_func(user_string):
 
 
 print(int_func('rusak irina stanislavovna'))
-
-
